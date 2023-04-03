@@ -19,7 +19,16 @@ async function createPatient({ name, email, password }) {
     );
 }
 
+async function updatePatientToken({ user, token }) {
+    return connectionDb.query(
+        `UPDATE "public.patient" SET token=$1 WHERE id=$2;`,
+        [token, user.id]);
+}
+
+
+
 export default {
 	findPatientByEmail,
 	createPatient,
+    updatePatientToken
 };

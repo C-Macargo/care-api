@@ -11,7 +11,21 @@ async function createPatient(req, res){
     }
 }
 
+async function loginPatient(req, res){
+    const {email, password} = req.body
+
+    try{
+        const token = await userServices.loginPatient({ email, password });
+        return res.send({ token });
+    }catch(err){
+        return res.status(500).send(err.message)
+    }
+}
+
+
+
 
 export default {
-    createPatient
+    createPatient,
+    loginPatient
 }
